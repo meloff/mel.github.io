@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,8 +72,8 @@
             // Строка для подписи
             const signString = `${m_shop}:${m_orderid}:${m_amount}:${m_curr}:${m_desc}:${secretKey}`;
 
-            // Генерация подписи с помощью MD5
-            const m_sign = CryptoJS.MD5(signString).toString(CryptoJS.enc.Hex).toUpperCase();  // Добавляем toUpperCase()
+            // Генерация подписи с помощью SHA-256
+            const m_sign = CryptoJS.SHA256(signString).toString(CryptoJS.enc.Hex).toUpperCase();  // Используем SHA-256
 
             // Установка подписи в скрытое поле
             form.m_sign.value = m_sign;
