@@ -43,14 +43,14 @@
 <body>
     <div class="payment-container">
         <h1>Оплата через Payeer</h1>
-        <p>Сумма к оплате: <strong>100 RUB</strong></p>
+        <p>Сумма к оплате: <strong>150 RUB</strong></p>
         <form method="POST" action="https://payeer.com/merchant/">
             <input type="hidden" name="m_shop" value="2162917268"> <!-- ID вашего мерчанта -->
             <input type="hidden" name="m_orderid" value="12345150"> <!-- Уникальный номер заказа -->
             <input type="hidden" name="m_amount" value="150.00"> <!-- Сумма к оплате -->
             <input type="hidden" name="m_curr" value="RUB"> <!-- Валюта -->
             <input type="hidden" name="m_desc" value="VGVzdCBwYXltZW50"> <!-- Описание товара, закодированное в base64 -->
-            <input type="hidden" name="m_sign" value="2C1F82B5E5AFB2B213FC07FEA6B4700D6A1A44AE39215A4CAFA4375EA3EC8C04"> <!-- Подпись будет вручную генерироваться -->
+            <input type="hidden" name="m_sign" value="798B5D7952ACC1D742415BBD8452873834642A18CEF04114233B16C7D975CA27"> <!-- Подпись будет вручную генерироваться -->
             <button type="submit" class="payment-button">Оплатить</button>
         </form>
     </div>
