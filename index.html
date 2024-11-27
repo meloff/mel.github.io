@@ -55,6 +55,7 @@
         </form>
     </div>
 
+    <!-- Подключаем библиотеку CryptoJS для генерации подписи -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1-crypto-js.js"></script>
     <script>
         // Секретный ключ, полученный из вашего аккаунта Payeer
@@ -69,19 +70,19 @@
             const m_curr = form.m_curr.value;
             const m_desc = form.m_desc.value;
 
-            // Строка для подписи
+            // Строка для подписи, разделенная двоеточием
             const signString = `${m_shop}:${m_orderid}:${m_amount}:${m_curr}:${m_desc}:${secretKey}`;
 
             // Генерация подписи с помощью SHA-256
-            const m_sign = CryptoJS.SHA256(signString).toString(CryptoJS.enc.Hex).toUpperCase();  // Используем SHA-256
+            const m_sign = CryptoJS.SHA256(signString).toString(CryptoJS.enc.Hex).toUpperCase();
 
-            // Установка подписи в скрытое поле
+            // Установка подписи в скрытое поле формы
             form.m_sign.value = m_sign;
         }
 
-        // Генерация подписи при отправке формы
+        // Генерация подписи перед отправкой формы
         document.getElementById('paymentForm').addEventListener('submit', function(event) {
-            generateSign();
+            generateSign();  // Генерируем подпись
         });
     </script>
 </body>
