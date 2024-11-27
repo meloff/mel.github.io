@@ -44,15 +44,45 @@
     <div class="payment-container">
         <h1>Оплата через Payeer</h1>
         <p>Сумма к оплате: <strong>100 RUB</strong></p>
-        <form method="POST" action="https://payeer.com/merchant/">
-            <input type="hidden" name="m_shop" value="2162917268">
+        <form method="POST" action="https://payeer.com/merchant/" id="paymentForm">
+            <input type="hidden" name="m_shop" value="2162917268"> 
             <input type="hidden" name="m_orderid" value="12345">
             <input type="hidden" name="m_amount" value="100.00">
             <input type="hidden" name="m_curr" value="RUB">
             <input type="hidden" name="m_desc" value="Оплата товара">
-            <input type="hidden" name="m_sign" value="your_sign_hash">
+            <input type="hidden" name="m_sign" id="m_sign" value="">
             <button type="submit" class="payment-button">Оплатить</button>
         </form>
     </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1-crypto-js.js"></script>
+    <script>
+        // Секретный ключ, полученный из вашего аккаунта Payeer
+        const secretKey = 'OPY86oo50PIkvSbR';
+
+        // Функция для генерации подписи
+        function generateSign() {
+            const form = document.getElementById('paymentForm');
+            const m_shop = form.m_shop.value;
+            const m_orderid = form.m_orderid.value;
+            const m_amount = form.m_amount.value;
+            const m_curr = form.m_curr.value;
+            const m_desc = form.m_desc.value;
+
+            // Строка для подписи
+            const signString = `${m_shop}:${m_orderid}:${m_amount}:${m_curr}:${m_desc}:${secretKey}`;
+
+            // Генерация подписи с помощью MD5
+            const m_sign = CryptoJS.MD5(signString).toString(CryptoJS.enc.Hex);
+
+            // Установка подписи в скрытое поле
+            form.m_sign.value = m_sign;
+        }
+
+        // Генерация подписи при отправке формы
+        document.getElementById('paymentForm').addEventListener('submit', function(event) {
+            generateSign();
+        });
+    </script>
 </body>
 </html>
