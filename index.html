@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Оплата через Payeer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+        }
+        .payment-container {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .payment-container h1 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .payment-button {
+            background-color: #0084ff;
+            color: #ffffff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        .payment-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h1>Оплата через Payeer</h1>
+        <p>Сумма к оплате: <strong>100 RUB</strong></p>
+        <form method="POST" action="https://payeer.com/merchant/">
+            <input type="hidden" name="m_shop" value="2162917268"> <!-- ID вашего мерчанта -->
+            <input type="hidden" name="m_orderid" value="12345150"> <!-- Уникальный номер заказа -->
+            <input type="hidden" name="m_amount" value="150.00"> <!-- Сумма к оплате -->
+            <input type="hidden" name="m_curr" value="RUB"> <!-- Валюта -->
+            <input type="hidden" name="m_desc" value="VGVzdCBwYXltZW50"> <!-- Описание товара, закодированное в base64 -->
+            <input type="hidden" name="m_sign" value="2C1F82B5E5AFB2B213FC07FEA6B4700D6A1A44AE39215A4CAFA4375EA3EC8C04"> <!-- Подпись будет вручную генерироваться -->
+            <button type="submit" class="payment-button">Оплатить</button>
+        </form>
+    </div>
+</body>
+</html>
